@@ -1,0 +1,42 @@
+html,
+body,
+#map-id {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.legend {
+  padding: 10px;
+  font-family: Sanchez, serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #555;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend .pollution {
+  color: #ec8a2e;
+}
+
+.legend .SCHOOL_RATING {
+  color: #a0353a;
+}
+
+.legend .employment {
+  color: #f4ba48;
+}
+.legend .income {
+  color: #f4ba48;
+}
+
+.legend .allergens {
+  color: #1b904f;
+}
+
+.legend .age_range {
+  color: #007dff;
+}
