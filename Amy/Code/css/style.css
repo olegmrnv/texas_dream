@@ -1,41 +1,11 @@
-html {
-  font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
+html,
 body,
 #map-id {
   height: 100%;
   padding: 0;
   margin: 0;
 }
-/* element.style {
-} */
-/* @media (max-width: 991px) */
-.body {
-    width: auto;
-    float: none;
-    margin-bottom: 8px;
-}
-/* @media (max-width: 767px) */
-.body-container {
-    margin-left: 0;
-}
 
-/* @media (max-width: 767px) */
-.body-content {
-    min-height: 0;
-}
-/* @media (max-width: 991px) */
-.body-content {
-    margin-right: 0;
-    min-height: 0;
-}
-.body-content {
-    padding: 15px;
-    border: 1px solid #ddd;
-    margin-right: 310px;
-    min-height: 600px;
-}
 .legend {
   padding: 10px;
   font-family: Sanchez, serif;
@@ -48,82 +18,25 @@ body,
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.legend .low {
+.legend .pollution {
   color: #ec8a2e;
 }
 
-.legend .empty {
+.legend .SCHOOL_RATING {
   color: #a0353a;
 }
 
-.legend .coming-soon {
+.legend .employment {
+  color: #f4ba48;
+}
+.legend .income {
   color: #f4ba48;
 }
 
-.legend .healthy {
+.legend .allergens {
   color: #1b904f;
 }
 
-.legend .out-of-order {
+.legend .age_range {
   color: #007dff;
-}
-body {
-  padding-top: 52px;
-}
-@media (max-width: 991px)
-body {
-  font-size: 17px;
-}
-@media (max-width: 1449px)
-body {
-  font-size: 15px;
-}
-body {
-  font-family: "Grotesque MT STD","Trebuchet MS",Tahoma;
-  font-size: 17px;
-  color: #3f454c;
-  padding-top: 82px;
-}
-body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-  background-color: #fff;
-}
-body {
-  margin: 0;
-}
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-user agent stylesheet
-body {
-  display: block;
-  margin: 8px;
-}
-html {
-  font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-user agent stylesheet
-html {
-  color: -internal-root-color;
-}
-*:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-*:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
