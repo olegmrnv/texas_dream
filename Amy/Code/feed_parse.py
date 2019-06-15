@@ -4,7 +4,7 @@ import time
 import queue
 from time import strftime
  
-import feedparser     # available at http://feedparser.org
+import feedparser 
  
  
 THREAD_LIMIT = 20
