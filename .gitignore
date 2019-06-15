@@ -2,3 +2,6 @@ config.py
 __pycache__
 .ipynb_checkpoints
 config.js
+.vscode
+init.txt
+.DS_Store
