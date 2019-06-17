@@ -1,7 +1,4 @@
-console.log("first message ");
-
 var url = "https://raw.githubusercontent.com/TNRIS/tx.geojson/master/counties/tx_counties.geojson";
-console.log("first message1 ");
 
 d3.json(url, function (new_data) {
   console.log("first message 2");
