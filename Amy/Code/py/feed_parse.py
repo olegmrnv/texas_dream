@@ -11,25 +11,41 @@ THREAD_LIMIT = 20
 jobs = queue.Queue(0)
 rss_to_process = queue.Queue(THREAD_LIMIT)
  
-DATABASE = "rss.sqlite"
+DATABASE = "aqi.sqlite"
  
 conn = sqlite3.connect(DATABASE)
 conn.row_factory = sqlite3.Row
 c = conn.cursor()
  
 #insert initial values into feed database
-c.execute('CREATE TABLE IF NOT EXISTS RSSFeeds (id INTEGER PRIMARY KEY AUTOINCREMENT, url VARCHAR(1000));')
-c.execute('CREATE TABLE IF NOT EXISTS RSSEntries (entry_id INTEGER PRIMARY KEY AUTOINCREMENT, id, url, title, content, date);')
-c.execute("INSERT INTO RSSFeeds(url) VALUES('http://feeds.enviroflash.info/rss/realtime/60.xml?id=9620423B-A942-33E7-094004C677B90C6B');")
+# c.execute('CREATE TABLE IF NOT EXISTS CurrentObs (id INTEGER PRIMARY KEY AUTOINCREMENT, url VARCHAR(1000));')
+# c.execute('CREATE TABLE IF NOT EXISTS CurrentObs (entry_id INTEGER PRIMARY KEY AUTOINCREMENT, id, url, title, content, date);')
+c.execute("INSERT INTO RSSFeeds(url) VALUES('http://www.airnowapi.org/aq/data/?startDate=2019-06-15T20&endDate=2019-06-15T21&parameters=OZONE,PM25,PM10,CO,NO2,SO2&BBOX=-108.200607,25.549560,-92.643967,37.846387&dataType=A&format=application/json&verbose=1&nowcastonly=0&API_KEY=9EFBDC3F-9727-474B-8AC4-B950F718C9C7');")
+
+c.execute('''CREATE TABLE IF NOT EXISTS "CurrentObs" (
+	"entry_id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"dateObserved"	TEXT,
+	"hourObserved"	NUMERIC,
+	"localTimeZone"	TEXT,
+	"reportingArea"	TEXT,
+	"stateCode"	TEXT,
+	"latitude"	NUMERIC,
+	"longitude"	NUMERIC,
+	"parameterName"	TEXT,
+	"aqi"	NUMERIC,
+	"categoryNumber"	NUMERIC,
+	"categoryName"	TEXT
+)''')
  
 feeds = c.execute('SELECT id, url FROM RSSFeeds').fetchall()
  
 def store_feed_items(id, items):
     """ Takes a feed_id and a list of items and stored them in the DB """
     for entry in items:
-        c.execute('SELECT entry_id from RSSEntries WHERE url=?', (entry.link,))
+        c.execute('SELECT entry_id from CurrentObs WHERE url=?', (entry.link,))
         if len(c.fetchall()) == 0:
-            c.execute('INSERT INTO RSSEntries (id, url, title, content, date) VALUES (?,?,?,?,?)', (id, entry.link, entry.title, entry.summary, strftime("%Y-%m-%d %H:%M:%S",entry.updated_parsed)))
+            c.execute('INSERT INTO CurrentObs (DateObserved,HourObserved,LocalTimeZone,ReportingArea,StateCode,Latitude,Longitude,ParameterName,AQI,CategoryNumber,CategoryName) VALUES (?,?,?,?,?,?,?,?,?,?,?)', (id, entry.link, entry.title, entry.summary, strftime("%Y-%m-%d %H:%M:%S",entry.updated_parsed)))
+            
  
 def thread():
     while True:
