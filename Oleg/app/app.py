@@ -6,7 +6,7 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -17,7 +17,7 @@ app = Flask(__name__)
 #################################################
 # Database Setup
 #################################################
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/tx_data.sqlite"
 db = SQLAlchemy(app)
 
@@ -26,9 +26,12 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
+# engine = create_engine("sqlite:///db/tx_data.sqlite")
+# inspector = inspect(engine)
+
 # Save references to each table
-# income = Base.classes.Per_Capita_Personal_Income
-# unemployment = Base.classes.Unemployment_Rate
+income = Base.classes.Per_Capita_Personal_Income
+unemployment = Base.classes.Unemployment_Rate
 
 
 @app.route("/")
@@ -37,16 +40,16 @@ def index():
     return render_template("index.html")
 
 
-# @app.route("/names")
-# def names():
-#     """Return a list of sample names."""
+@app.route("/unemp")
+def unemp():
+    """Return a list of sample names."""
 
-#     # Use Pandas to perform the sql query
-#     stmt = db.session.query(Samples).statement
-#     df = pd.read_sql_query(stmt, db.session.bind)
+    # Use Pandas to perform the sql query
+    stmt = db.session.query(income).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
 
-#     # Return a list of the column names (sample names)
-#     return jsonify(list(df.columns)[2:])
+    # Return a list of the column names (sample names)
+    return jsonify(list(df.Income), list(df.County))
 
 
 # @app.route("/metadata/<sample>")
