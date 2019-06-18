@@ -45,11 +45,24 @@ def unemp():
     """Return a list of sample names."""
 
     # Use Pandas to perform the sql query
+    stmt = db.session.query(unemployment).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+
+    # Return a list of the column names (sample names)
+    my_dict = dict(zip(list(df.County), list(df.Unemployment)))
+    return jsonify(my_dict)
+
+@app.route("/income")
+def inc():
+    """Return a list of sample names."""
+
+    # Use Pandas to perform the sql query
     stmt = db.session.query(income).statement
     df = pd.read_sql_query(stmt, db.session.bind)
 
     # Return a list of the column names (sample names)
-    return jsonify(list(df.Income), list(df.County))
+    my_dict = dict(zip(list(df.County), list(df.Income)))
+    return jsonify(my_dict)
 
 
 # @app.route("/metadata/<sample>")
