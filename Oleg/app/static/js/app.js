@@ -1,3 +1,43 @@
+var county_list = "/counties";
+function init() {
+  // Grab a reference to the dropdown select element  
+  var selector = d3.select("#selDataset");
+  // Use the list of sample names to populate the select options
+  d3.json(county_list, function (sampleNames) {
+
+    sampleNames.forEach((sample) => {
+      selector
+        .append("option")
+        .text(sample.substring(0, sample.length - 7))
+        .property("value", sample);
+    });
+
+    // Use the first sample from the list to build the initial plots
+    // const firstSample = sampleNames[0];
+    // buildCharts(firstSample);
+    // buildMetadata(firstSample);
+  });
+}
+
+
+
+
+
+init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var url = "https://raw.githubusercontent.com/TNRIS/tx.geojson/master/counties/tx_counties.geojson";
 var geojson_unempl;
 var geojson_income;
@@ -91,6 +131,8 @@ d3.json(url, function (new_data) {
   // path to data from DB
   var unempURL = "/unemp";
   var incomeURL = "/income";
+
+
 
   // getting data from RESTfull API for unemployment
   d3.json(unempURL, function (unemp_data) {
@@ -194,7 +236,7 @@ d3.json(url, function (new_data) {
 
       // Pass our map layers into our layer control
       // Add the layer control to the map
-      
+
 
 
 
