@@ -11,24 +11,11 @@ function init() {
         .text(sample.substring(0, sample.length - 7))
         .property("value", sample);
     });
-
-    // Use the first sample from the list to build the initial plots
-    // const firstSample = sampleNames[0];
-    // buildCharts(firstSample);
-    // buildMetadata(firstSample);
+ 
   });
 }
 
-
-
-
-
 init();
-
-
-
-
-
 
 
 
@@ -266,3 +253,14 @@ d3.json(url, function (new_data) {
 
   //closing d3 call to original geojson
 });
+
+
+
+
+// when drop-down changed this functions run
+function optionChanged(newCounty) {
+  // Fetch new data each time a new sample is selected
+
+  // buildCharts(newSample);
+  // buildMetadata(newSample);
+}
