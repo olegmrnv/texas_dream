@@ -176,7 +176,7 @@ d3.json(url, function (new_data) {
 
         // getting data for schools
         d3.json(schoolURL, function (schoolData) {
-          console.log(schoolData);
+          // console.log(schoolData);
 
 
           for (var i = 0; i < schoolData.length; i++) {
