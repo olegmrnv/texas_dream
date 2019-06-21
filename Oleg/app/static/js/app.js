@@ -132,6 +132,9 @@ d3.json(url, function (new_data) {
   var schoolURL = "/school";
   var markerGroup = [];
   var schoolLayer;
+  var airURL = "/air_quality";
+  var markerGroupAir = [];
+  var AirLayer;
 
 
   // getting data from RESTfull API for unemployment
@@ -175,8 +178,7 @@ d3.json(url, function (new_data) {
 
 
         // getting data for schools
-        d3.json(schoolURL, function (schoolData) {
-          // console.log(schoolData);
+        d3.json(schoolURL, function (schoolData) {    
 
 
           for (var i = 0; i < schoolData.length; i++) {
@@ -187,6 +189,15 @@ d3.json(url, function (new_data) {
 
           schoolLayer = L.layerGroup(markerGroup);
 
+
+          d3.json(airURL, function (airData) { 
+            for (var i = 0; i < airData.length; i++) {
+              markerGroupAir.push(
+                L.marker([airData[i].Latitude, airData[i].Longitude]).bindPopup("<h4>" + airData[i].SiteName)
+              )
+            }
+  
+            AirLayer = L.layerGroup(markerGroupAir);
 
 
 
@@ -262,7 +273,8 @@ d3.json(url, function (new_data) {
           var overlayMaps = {
             "Unemployment": geojson_unempl,
             "Income": geojson_income,
-            "Best Schools": schoolLayer
+            "Best Schools": schoolLayer,
+            "Air Stations": AirLayer
           };
 
 
@@ -287,8 +299,8 @@ d3.json(url, function (new_data) {
           info.addTo(myMap);
 
           L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'bottomright' }).addTo(myMap);
-
-
+// closing d3 call for air 
+        });
           // closing d3 call for schools
         });
         //closing d3 call to population 
