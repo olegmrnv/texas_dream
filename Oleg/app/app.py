@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 import numpy as np
-
+import json
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -33,6 +33,7 @@ Base.prepare(db.engine, reflect=True)
 income = Base.classes.Per_Capita_Personal_Income
 unemployment = Base.classes.Unemployment_Rate
 population = Base.classes.population
+tempreferance = Base.classes.combine_schools_zip_geo
 
 
 @app.route("/")
@@ -88,6 +89,20 @@ def popul():
     my_dict = dict(zip(list(df.County), list(df.Population)))
     return jsonify(my_dict)
 
+@app.route("/school")
+def school():
+    """Return a list of sample names."""
+
+
+    stmt = db.session.query(tempreferance).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+
+    # Return a list of the column names (sample names)
+
+    my_dict = df.to_dict(orient='records')
+    j = json.dumps(my_dict)
+
+    return j
 
 # @app.route("/metadata/<sample>")
 # def sample_metadata(sample):
