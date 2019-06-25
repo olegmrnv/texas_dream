@@ -14,3 +14,5 @@
  - choropleth.js created layers and color range visualization for income and unemployment
  - D3.js was used to obtain the geographic lat/long for geoJSON boundary polygons
  - geoJSON was used to create boundary polygons
+
+Deployed version: https://texas-multi-choropleth.herokuapp.com/
