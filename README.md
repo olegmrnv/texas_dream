@@ -16,3 +16,6 @@
  - geoJSON was used to create boundary polygons
 
 Deployed version: https://texas-multi-choropleth.herokuapp.com/
+
+
+![graphs](TXdream.JPG "some of the graphs")
